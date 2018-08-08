@@ -2,7 +2,7 @@
 
 ## 1.1 Sobre Este Tutorial
 
-Esse Tutorial apresenta uma solução completa de construção de uma Base Hidrográfica Ottocodificada por meio de Sistema de Banco de Dados Espaciais em Sistema Gerenciador de Banco de Dados Objeto-Relacional e está dividido em x partes:
+Esse Tutorial apresenta uma solução completa de construção de uma **Base Hidrográfica Ottocodificada** por meio de Sistema de Banco de Dados Espaciais (PostgreSQL/PostGIS) e está dividido em x partes:
 
 Parte I:
 
