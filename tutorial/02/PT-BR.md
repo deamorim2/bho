@@ -1,67 +1,71 @@
-# 1. IntroduÁ„o
+# 1. Introdu√ß√£o
 
-A gest„o de recursos hÌdricos demanda informaÁıes obtidas normalmente por sistemas de informaÁıes geogr·ficas(SIGs) que possam responder a perguntas como: qual a ·rea de contribuiÁ„o a montante de um determinado ponto em um rio? Ou qual o comprimento total dos cursos d'·gua de uma determinada bacia? Ou qual a disponibilidade hÌdrica em um determinado ponto? Para responder a estas e outras perguntas, a AgÍncia Nacional de ¡guas(ANA) disponibiliza a base hidrogr·fica ottocodificada(BHO), composta por planos de informaÁıes geogr·ficas como trechos de drenagem, ·reas de contribuiÁ„o hidrogr·fica e outras informaÁıes prÈ-processadas para ajudar na tomada de decis„o em recursos hÌdricos.
+A gest√£o de recursos h√≠dricos demanda informa√ß√µes obtidas normalmente por sistemas de informa√ß√µes geogr√°ficas(SIGs) que possam responder a perguntas como: qual a √°rea de contribui√ß√£o a montante de um determinado ponto em um rio? Ou qual o comprimento total dos cursos d'√°gua de uma determinada bacia? Ou qual a disponibilidade h√≠drica em um determinado ponto? Para responder a estas e outras perguntas, a Ag√™ncia Nacional de √Åguas(ANA) disponibiliza a base hidrogr√°fica ottocodificada(BHO), composta por planos de informa√ß√µes geogr√°ficas como trechos de drenagem, √°reas de contribui√ß√£o hidrogr√°fica e outras informa√ß√µes pr√©-processadas para ajudar na tomada de decis√£o em recursos h√≠dricos.
 
-Nas diversas propostas de codificaÁ„o ou classificaÁ„o de bacias hidrogr·ficas, destaca-se a codificaÁ„o desenvolvida pelo brasileiro Otto Pfafstetter. Dentre as vantagens dessa codificaÁ„o pode-se citar: representaÁ„o hier·rquica, baseada na topografia da ·rea drenada, economia de dÌgitos, informaÁ„o topolÛgica embutida nos dÌgitos, aplicabilidade global e integraÁ„o com Sistemas de InformaÁıes Geogr·ficas por meio da linguagem SQL.
+Nas diversas propostas de codifica√ß√£o ou classifica√ß√£o de bacias hidrogr√°ficas, destaca-se a codifica√ß√£o desenvolvida pelo brasileiro Otto Pfafstetter. Dentre as vantagens dessa codifica√ß√£o pode-se citar: representa√ß√£o hier√°rquica, baseada na topografia da √°rea drenada, economia de d√≠gitos, informa√ß√£o topol√≥gica embutida nos d√≠gitos, aplicabilidade global e integra√ß√£o com Sistemas de Informa√ß√µes Geogr√°ficas por meio da linguagem SQL.
 
-O presente tutorial descreve passo a passo os procedimentos para construir a base hidrogr·fica ottocodificada(BHO). A construÁ„o dessa base È realizada por meio das funcionalidades do projeto open-source [pghydro](www.pghydro.org), que È uma extens„o para o sistema gerenciador de banco de dados espaciais PostgreSQL/PostGIS.
+O presente tutorial descreve passo a passo os procedimentos para construir a base hidrogr√°fica ottocodificada(BHO). A constru√ß√£o dessa base √© realizada por meio das funcionalidades do projeto open-source [pghydro](www.pghydro.org), que √© uma extens√£o para o sistema gerenciador de banco de dados espaciais PostgreSQL/PostGIS.
 
-Essas funcionalidades s„o acionadas por meio de uma interface desenvolvida na linguagem Python como plugin intitulado Pghydro Tools para o Sistema de InformaÁ„o Geogr·fica QGIS (www.qgis.org).
+Essas funcionalidades s√£o acionadas por meio de uma interface desenvolvida na linguagem Python como plugin intitulado Pghydro Tools para o Sistema de Informa√ß√£o Geogr√°fica QGIS (www.qgis.org).
 
-S„o oferecidos aos componentes do SINGREH cursos de capacitaÁ„o e apoio tÈcnico para a construÁ„o de bases hidrogr·ficas ottocodificadas(BHO). Para tanto È necess·ria solicitaÁ„o formal da instituiÁ„o interessada dirigida ‡ CoordenaÁ„o do Conjuntura e Gest„o da InformaÁ„o (CCOGI) da SuperintendÍncia de Planejamento de Recursos HÌdricos (SPR) da AgÍncia Nacional de ¡guas (ANA) pelo e-mail: bho@ana.gov.br
+S√£o oferecidos aos componentes do SINGREH cursos de capacita√ß√£o e apoio t√©cnico para a constru√ß√£o de bases hidrogr√°ficas ottocodificadas(BHO). Para tanto √© necess√°ria solicita√ß√£o formal da institui√ß√£o interessada dirigida √† Coordena√ß√£o do Conjuntura e Gest√£o da Informa√ß√£o (CCOGI) da Superintend√™ncia de Planejamento de Recursos H√≠dricos (SPR) da Ag√™ncia Nacional de √Åguas (ANA) pelo e-mail: bho@ana.gov.br
 
 ## 1.2.	Aspectos Gerais
 
-O processo de construÁ„o de Bases Hidrogr·ficas Ottocodificadas(BHO) para a gest„o de Recursos HÌdricos est· condicionado pelas normas vigentes tais como a ConstituiÁ„o Federal, as Leis 9.433/1997 e 9.984/2000 e as resoluÁıes pertinentes do CNRH e da prÛpria ANA.
+O processo de constru√ß√£o de Bases Hidrogr√°ficas Ottocodificadas(BHO) para a gest√£o de Recursos H√≠dricos est√° condicionado pelas normas vigentes tais como a Constitui√ß√£o Federal, as Leis 9.433/1997 e 9.984/2000 e as resolu√ß√µes pertinentes do CNRH e da pr√≥pria ANA.
 
-Uma das mais importantes È a ResoluÁ„o n∫ 399/2004 que estabelece o critÈrio tÈcnico para a identificaÁ„o do curso dí·gua principal de uma bacia hidrogr·fica e estabelece esse curso dí·gua assim determinado como a unidade ‡ qual se atribui o domÌnio estadual ou da Uni„o, segundo o critÈrio estabelecido na ConstituiÁ„o.
+Uma das mais importantes √© a Resolu√ß√£o n¬∫ 399/2004 que estabelece o crit√©rio t√©cnico para a identifica√ß√£o do curso d‚Äô√°gua principal de uma bacia hidrogr√°fica e estabelece esse curso d‚Äô√°gua assim determinado como a unidade √† qual se atribui o dom√≠nio estadual ou da Uni√£o, segundo o crit√©rio estabelecido na Constitui√ß√£o.
 
-Desse modo, s„o passos fundamentais na elaboraÁ„o de uma BHO, a determinaÁ„o e codificaÁ„o dos cursos dí·gua e a atribuiÁ„o do domÌnio a esses cursos.
+Desse modo, s√£o passos fundamentais na elabora√ß√£o de uma BHO, a determina√ß√£o e codifica√ß√£o dos cursos d‚Äô√°gua e a atribui√ß√£o do dom√≠nio a esses cursos.
 
-Observe-se que n„o È a unidade "Rio" que recebe o domÌnio, e sim o curso d'·gua. Segundo a ResoluÁ„o n∫ 399/2004, o curso dí·gua principal de uma bacia È assim definido:
+Observe-se que n√£o √© a unidade "Rio" que recebe o dom√≠nio, e sim o curso d'√°gua. Segundo a Resolu√ß√£o n¬∫ 399/2004, o curso d‚Äô√°gua principal de uma bacia √© assim definido:
 
-"Em cada confluÍncia ser· considerado curso dí·gua principal aquele cuja bacia hidrogr·fica tiver a maior ·rea de drenagem."
+"Em cada conflu√™ncia ser√° considerado curso d‚Äô√°gua principal aquele cuja bacia hidrogr√°fica tiver a maior √°rea de drenagem."
 
-Dessa forma, um curso dí·gua pode ser composto de trechos de v·rios rios, tal como ocorre com o curso dí·gua principal da bacia do S„o Francisco, composto por parte do rio S„o Francisco mais o rio Sambur·, ou o curso principal da bacia AmazÙnica, composto pelo rio Amazonas, mais o rio Solimıes, mais o rio MaraÒÛn e trechos sem nome nas cabeceiras nos Andes. Outra consequÍncia not·vel desse critÈrio È que um rio pode ser parte da Uni„o e parte de um estado, como È o caso do rio S„o Francisco, cujas cabeceiras s„o de domÌnio do estado de Minas Gerais.
+Dessa forma, um curso d‚Äô√°gua pode ser composto de trechos de v√°rios rios, tal como ocorre com o curso d‚Äô√°gua principal da bacia do S√£o Francisco, composto por parte do rio S√£o Francisco mais o rio Sambur√°, ou o curso principal da bacia Amaz√¥nica, composto pelo rio Amazonas, mais o rio Solim√µes, mais o rio Mara√±√≥n e trechos sem nome nas cabeceiras nos Andes. Outra consequ√™ncia not√°vel desse crit√©rio √© que um rio pode ser parte da Uni√£o e parte de um estado, como √© o caso do rio S√£o Francisco, cujas cabeceiras s√£o de dom√≠nio do estado de Minas Gerais.
 
-A ResoluÁ„o n∫ 30/2002 do CNRH estabelece a codificaÁ„o de Otto Pfafstetter como a codificaÁ„o oficial de bacias do Brasil, a qual, pelas suas caracterÌsticas tÈcnicas, se adequa perfeitamente ‡ lÛgica estabelecida pela ResoluÁ„o n∫ 399/2004.
+A Resolu√ß√£o n¬∫ 30/2002 do CNRH estabelece a codifica√ß√£o de Otto Pfafstetter como a codifica√ß√£o oficial de bacias do Brasil, a qual, pelas suas caracter√≠sticas t√©cnicas, se adequa perfeitamente √† l√≥gica estabelecida pela Resolu√ß√£o n¬∫ 399/2004.
 
-O processo descrito no presente documento se baliza nos textos normativos citados e os traduz em instruÁıes para a elaboraÁ„o de uma base de dados geogr·fica totalmente aderente ‡s necessidades da gest„o de recursos hÌdricos.
+O processo descrito no presente documento se baliza nos textos normativos citados e os traduz em instru√ß√µes para a elabora√ß√£o de uma base de dados geogr√°fica totalmente aderente √†s necessidades da gest√£o de recursos h√≠dricos.
 
-Algumas premissas resultam dessa necess·ria submiss„o aos textos legais e infralegais:
+Algumas premissas resultam dessa necess√°ria submiss√£o aos textos legais e infralegais:
 
-1. As bases s„o oriundas da cartografia oficial.
-2. Preserva-se ao m·ximo o traÁado e posicionamento constantes na cartografia oficial. Erros detectados s„o encaminhados para correÁ„o pelos Ûrg„os respons·veis ñ IBGE e DSG;
-3. Em caso de d˙vidas, os Ûrg„os respons·veis pela cartografia oficial s„o consultados;
-4. A codificaÁ„o das bacias È feita segundo o mÈtodo de Otto Pfafstetter. Foram desenvolvidas codificaÁıes derivadas, como cÛdigo de trecho, de curso dí·gua e de rio;
-5. Os cÛdigos convencionados como ponto de partida para a codificaÁ„o s„o os estabelecidos pela ResoluÁ„o n∫ 30/2002 do CNRH;
-6. Os domÌnios s„o identificados usando os limites polÌticos publicados pelo IBGE e os critÈrios estipulados pela ConstituiÁ„o Federal de 1988 em seu Art. 20, inciso III.
+1. As bases s√£o oriundas da cartografia oficial.
+2. Preserva-se ao m√°ximo o tra√ßado e posicionamento constantes na cartografia oficial. Erros detectados s√£o encaminhados para corre√ß√£o pelos √≥rg√£os respons√°veis ‚Äì IBGE e DSG;
+3. Em caso de d√∫vidas, os √≥rg√£os respons√°veis pela cartografia oficial s√£o consultados;
+4. A codifica√ß√£o das bacias √© feita segundo o m√©todo de Otto Pfafstetter. Foram desenvolvidas codifica√ß√µes derivadas, como c√≥digo de trecho, de curso d‚Äô√°gua e de rio;
+5. Os c√≥digos convencionados como ponto de partida para a codifica√ß√£o s√£o os estabelecidos pela Resolu√ß√£o n¬∫ 30/2002 do CNRH;
+6. Os dom√≠nios s√£o identificados usando os limites pol√≠ticos publicados pelo IBGE e os crit√©rios estipulados pela Constitui√ß√£o Federal de 1988 em seu Art. 20, inciso III.
 
 
 ## 1.3. Objetivo
 
-O objetivo deste tutorial È descrever o processo que resulta na construÁ„o de uma Base Hidrogr·fica Ottocodificada(BHO), desde a preparaÁ„o dos dados de entrada atÈ a sistematizaÁ„o dos nomes de rios, que È a ˙ltima etapa do processo.
+O objetivo deste tutorial √© descrever o processo que resulta na constru√ß√£o de uma Base Hidrogr√°fica Ottocodificada(BHO), desde a prepara√ß√£o dos dados de entrada at√© a sistematiza√ß√£o dos nomes de rios, que √© a √∫ltima etapa do processo.
  
 ## 1.4. Resumo do Processo
 
-A construÁ„o da base hidrogr·fica em banco de dados espaciais proposta nesse trabalho compreende 7 etapas:
+A constru√ß√£o da base hidrogr√°fica em banco de dados espaciais proposta nesse trabalho compreende 7 etapas:
 
-1. Criar a extens„o espacial e a extens„o pghydro no banco de dados espaciais;
-2. Preparar o dado de entrada da camada de hidrografia composta por dados vetoriais do tipo linha;
-3. Inserir e consistir a rede hidrogr·fica no banco de dados;
-4. Gerar as ·reas de contribuiÁ„o hidrogr·fica a partir do Modelo Digital de ElevaÁ„o Hidrologicamente Consistente(MDEHC);
-5. Inserir e consistir as ·reas de contribuiÁ„o hidrogr·fica no banco de dados;
-6. Verificar a consistÍncia da rede de drenagem com as ·reas de contribuiÁ„o hidrogr·fica;
-7. Gerar a codificaÁ„o de bacias de Pfafstetter e as informaÁıes hidrogr·ficas finais.
+1. Preparar o dado de entrada da camada de hidrografia composta por dados vetoriais do tipo linha;
+2. Criar a extens√£o espacial e a extens√£o pghydro no banco de dados espaciais;
+3. Inserir e consistir a rede hidrogr√°fica no banco de dados;
+4. Gerar as √°reas de contribui√ß√£o hidrogr√°fica a partir do Modelo Digital de Eleva√ß√£o Hidrologicamente Consistente(MDEHC);
+5. Inserir e consistir as √°reas de contribui√ß√£o hidrogr√°fica no banco de dados;
+6. Verificar a consist√™ncia da rede de drenagem com as √°reas de contribui√ß√£o hidrogr√°fica;
+7. Gerar a codifica√ß√£o de bacias de Pfafstetter e as informa√ß√µes hidrogr√°ficas finais.
 
-Opcional: Dominialidade de Cursos Dí·gua, AgregaÁ„o de Bacias e SistematizaÁ„o da HidronÌmia (nomes dos corpos d'·gua).
+Opcional:
 
-Figura 1 - Fluxo geral do processo de construÁ„o da base hidrogr·fica ottocodificada
+8. Dominialidade de Cursos D‚Äô√°gua;
+9. Sistematiza√ß√£o da Hidron√≠mia (nomes dos corpos d'√°gua);
+10. Agrega√ß√£o de Bacias.
 
-Figura 2 - Fluxo do processo de consistÍncia dos trechos de drenagem
+Figura 1 - Fluxo geral do processo de constru√ß√£o da base hidrogr√°fica ottocodificada
 
-Figura 3 - Fluxo do processo de consistÍncia das ·reas de contribuiÁ„o hidrogr·fica
+Figura 2 - Fluxo do processo de consist√™ncia dos trechos de drenagem
 
-Figura 4 - Fluxo do processo de consistÍncia dos trechos de drenagem com as ·reas de contribuiÁ„o hidrogr·fica
+Figura 3 - Fluxo do processo de consist√™ncia das √°reas de contribui√ß√£o hidrogr√°fica
 
-Figura 5 - Fluxo do processo de geraÁ„o das informaÁıes hidrogr·ficas finais
+Figura 4 - Fluxo do processo de consist√™ncia dos trechos de drenagem com as √°reas de contribui√ß√£o hidrogr√°fica
+
+Figura 5 - Fluxo do processo de gera√ß√£o das informa√ß√µes hidrogr√°ficas finais
