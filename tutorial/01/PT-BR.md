@@ -64,11 +64,3 @@ Exemplo:
 >Clique em _Arquivo > Novo_.
 
 >Marque a opção com a palavra _Confirma_
-
-## 1.3 Requisitos Tecnológicos
-
-Postgresql 9.5+
-
-PostGIS 2.3+
-
-QGIS 2.14+
