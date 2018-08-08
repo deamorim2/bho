@@ -2,15 +2,29 @@
 
 ## 1.1 Sobre Este Tutorial
 
-Esse tutorial apresenta uma solução completa de construção de uma **Base Hidrográfica Ottocodificada** por meio de Sistema de Banco de Dados Espaciais (PostgreSQL/PostGIS) e está dividido em x partes:
+Esse tutorial apresenta uma solução completa de construção de uma **Base Hidrográfica Ottocodificada** por meio de Sistema de Banco de Dados Espaciais (PostgreSQL/PostGIS) e está dividido em 7 etapas obrigatórias e 3 etapas opcionais:
 
-Parte I:
+1. Preparar o dado de entrada da camada de hidrografia composta por dados vetoriais do tipo linha;
 
-1. **Item 1**
+2. Criar a extensão espacial e a extensão pghydro no banco de dados espaciais;
 
-Parte II:
+3. Inserir e consistir a rede hidrográfica no banco de dados;
 
-1. **Item 2**
+4. Gerar as áreas de contribuição hidrográfica a partir do Modelo Digital de Elevação Hidrologicamente Consistente(MDEHC);
+
+5. Inserir e consistir as áreas de contribuição hidrográfica no banco de dados;
+
+6. Verificar a consistência da rede de drenagem com as áreas de contribuição hidrográfica;
+
+7. Gerar a codificação de bacias de Pfafstetter e as informações hidrográficas finais.
+
+Opcional:
+
+8. Dominialidade de Cursos D’água;
+
+9. Sistematização da Hidronímia (nomes dos corpos d'água);
+
+10. Agregação de Bacias.
 
 ## 1.2 Como usar esse tutorial 
 
