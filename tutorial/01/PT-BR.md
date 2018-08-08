@@ -2,19 +2,15 @@
 
 ## 1.1 Sobre Este Tutorial
 
-Esse Tutorial apresenta uma solução completa de implementação de um Sistema de Banco de Dados Espaciais em Sistema Gerenciador de Banco de Dados Objeto-Relacional e está dividido em duas partes:
+Esse Tutorial apresenta uma solução completa de construção de uma Base Hidrográfica Ottocodificada por meio de Sistema de Banco de Dados Espaciais em Sistema Gerenciador de Banco de Dados Objeto-Relacional e está dividido em x partes:
 
 Parte I:
 
-1. **Introdução ao PostGIS**
+1. **Item 1**
 
 Parte II:
 
-1. **Modelagem Conceitual**
-2. **Criação de Esquema Lógico**
-3. **Implementação Física**
-
-A parte I desse tutorial foi baseado no workshop [Introduction to PostGIS](http://workshops.boundlessgeo.com/postgis-intro/) da empresa [Boundless](https://boundlessgeo.com/) e está de acordo com a Licença Creative Commons Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional.
+1. **Item 2**
 
 ## 1.2 Como usar esse tutorial 
 
@@ -71,8 +67,8 @@ Exemplo:
 
 ## 1.3 Requisitos Tecnológicos
 
-Postgresql 9.0+
+Postgresql 9.5+
 
-PostGIS 2.0+
+PostGIS 2.3+
 
-QGIS 2.0+
+QGIS 2.14+
